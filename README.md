@@ -1,0 +1,2 @@
+# inappbidemo
+InAppBI Demo Capabilities
