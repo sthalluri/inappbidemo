@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="http://dev.inappbi.com/inappbi/styles/inappbi.css"/>
+    <script src="http://dev.inappbi.com/inappbi/scripts/inappbi.js"></script>
+
+    <style type="text/css">
+        #wrapper {
+            padding-left: 0;
+            -webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+        }
+
+        #page-content-wrapper {
+            width: 100%;
+            position: absolute;
+            padding: 15px;
+        }
+
+        #side-bar {
+            z-index: 1000 !important;
+            position: fixed;
+            left: 250px !important;
+            width: 0 !important;
+            height: 100% !important;
+            margin-left: -250px !important;
+            overflow-y: auto !important;
+            background: #F4F4F5;
+            -webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+            border-right: 1px solid #ccc;
+        }
+
+        .nav-side-menu {
+            overflow: auto;
+            font-family: 'Roboto', sans-serif;
+            font-size: 13px;
+            font-weight: 200;
+            background-color: #475069;
+            position: fixed;
+            top: 0px;
+            width: 250px;
+            height: 100%;
+            color: #e1ffff;
+            margin-left: -250px;
+
+        }
+
+        @media (min-width: 768px){
+            #wrapper {
+                padding-left: 250px;
+            }
+
+            #side-bar {
+                width: 250px;
+            }
+
+            #page-content-wrapper {
+                padding: 20px;
+                position: relative;
+            }
+        }
+
+        .grid-stack>.grid-stack-item>.grid-stack-item-content{
+            background: #fff;
+            -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+            -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+            box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.2);
+            border: 1px solid #eee;
+            padding: 8px;
+            min-height: 400px;
+        }
+        .navbar-inverse {
+            background-color: #5E9E5E !important;
+            border-bottom: 2px solid #358C35 !important;
+        }
+        .navbar-inverse .navbar-nav > li > a {
+            color: #fff;
+        }
+
+       .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
+            color: #fff;
+            background-color: #458445 !important;
+        }
+
+        .no-padding{
+            padding: 0px;
+        }
+        .leftmenu li {
+            line-height:30px !important; padding-left:10px !important;
+        }
+        .leftmenu a {
+            color:#ffffff !important;
+            word-break: break-all;
+            width: 15em;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .leftmenu a:hover, .leftmenu a:focus {
+            color:rgba(255,255,255,0.5) !important;
+        }
+
+        navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
+            color: #fff;
+            background-color: #458445 !important;
+        }
+    </style>
+</head>
+<body style="background-color: #F3F3F3;">
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="col-xs-12">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+            </button>
+            <span style="padding:16px 0px 10px 0px;font-size: 23px; color:#fff; font-weight:400;">
+                <i style="color:#fff; padding:13px 5px 10px 5px; border-radius:2px; font-size: 24px" class="fa fa-bell-o"></i>Fideliti Financials
+            </span>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="#">Home</a></li>
+                <li ><a href="#" onclick="showDashboardCompile()">My Dashboard</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-dashboard"></i> Dashboards<span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" id="vizList">
+                        <li><a href="#">Action</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-filter"></i> Data Models<span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" id="dataModelList">
+                        <li><a href="#">Loading Models...</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+<div class="col-xs-12 no-padding"  style="height: 100%; padding-top: 48px;">
+    <!-- Load by viz name -->
+    <div id="page-content-wrapper" style="padding-top: 48px;" class="col-sm-9 col-md-9 col-lg-10">
+        <!-- Template that is generated and injected -->
+        <div id="tpl" style="text-align: center">
+            <h1>Welcome!! <br/> <br/> This is a sample shell site. <br/><br/>Analytics powered by InAppBI</h1>
+        </div>
+    </div>
+</div>
+
+
+<div id="adhocEditor" style="display: none;">
+    <iframe src="" id="adhocEditorFrame" width="100%" height="1200px">
+        <p>Your browser does not support iframes.</p>
+    </iframe>
+</div>
+
+<script>
+
+    var vizList = [],
+        vizMap = {};
+
+    //Init EBIWrapper
+    var inAppBIWrapper = new InAppBIWrapper({
+        apiEndPoint : 'http://dev.inappbi.com/inappbi',
+        token : 'eyJhbGciOiJQQkVTMi1IUzI1NitBMTI4S1ciLCJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwicDJjIjo4MTkyLCJwMnMiOiJEQUgzLURQVXNmWlBTN1hEIn0.3j0_DsWdgrQuT95553V8tQMbd6ZZdpVDq56kkN45dK7BGBCCpGOS_w.hCzI-SYT2vvci5UYBDCLPw.iFgtfoo7l9yGGTbafOTNpANxFXq1qFfERsvXE6-Z3o1y0FY1pWVCKhpNCdNZQu5bB_vQz-hXWl2nQc8UW0wUTm07LQxQ3OKYxeYE9RrvxiVqD_E9JxosCsd36DVI-wTOq54S3O1Hn9kSPDAwMzZbPw.f2KxbFaCyEIF_jqW_3tiLg'
+    });
+
+    function updateViz(name){
+        $('#dashboard-btn-group').hide();
+        $('#adhocEditor').hide();
+        $('#page-content-wrapper').show();
+        inAppBIWrapper.loadByName('tpl', name);
+    }
+
+    //Render the list here
+    inAppBIWrapper.getVisualizations('root',function(response){
+        var template = '{{#each this}}<li style="list-style-type: none;"><a href="#" onclick="updateViz(\'{{resourceName}}\')" style="color: #A5ACB3; text-decoration: none;"><i class="fa fa-bar-chart"></i>{{name}}</li></a> {{/each}} ';
+        var html = ebi.Util.evalHandlebarTemplate(template, response.data, response.initParams);
+        $('#vizList').html(html);
+    });
+
+    inAppBIWrapper.getDataModels('root',function(response){
+        var template = '{{#each this}}<li style="list-style-type: none;"><a href="#" onclick="showAdhocEditor(\'{{id}}\')" style="color: #A5ACB3; text-decoration: none;"><i class="fa fa-bar-chart"></i>{{name}}</li></a> {{/each}} ';
+        var html = ebi.Util.evalHandlebarTemplate(template, response.data);
+        $('#dataModelList').html(html);
+    });
+
+    function showDashboardCompile(){
+        var homeDashboardName = 'HomeDashboard',
+            pkg = 'fidelity';
+        $('#adhocEditor').hide();
+        $('#page-content-wrapper').show();
+        inAppBIWrapper.getVisualizationByname(pkg+'.'+homeDashboardName, function(response){
+            console.log(response);
+            if(!response){
+                var homeDashboard = new inappbi.DashboardRenderer({
+                    name : homeDashboardName,
+                    pkg : pkg,
+                    visualizationType : 'Dashboard',
+                    dashboardLayout : []
+                }, inAppBIWrapper);
+                homeDashboard.render('tpl');
+            }else{
+                inAppBIWrapper.loadByName('tpl', pkg+'.'+homeDashboardName);
+            }
+        });
+    }
+
+    function showAdhocEditor(id){
+        console.log(id);
+        $('#page-content-wrapper').hide();
+        var url = '/#/app/adhoceditor/'+id+'//true';
+        $('#adhocEditor').show();
+        $('#adhocEditorFrame').attr('src', url)
+    }
+</script>
+
+</body>
+</html>
